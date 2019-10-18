@@ -6,19 +6,20 @@ import api from '../services/api';
 export default function Book({navigation}){
 
     [date,setDate] = useState('');
-    const user_id = AsyncStorage.getItem('user');
+    
     const spot_id = navigation.getParam('id');
 
     async function handleSubmit(){
-        //console.log(user_id);
-        const response = await api.post(`/spots/${spot_id}/bookings`, {
-            date,
-            headers:{
+        
+        const user_id = await AsyncStorage.getItem('user');
+        await api.post(`/spots/${spot_id}/bookings`,{
+            date
+        }, {
+            headers: {
                 user_id
-            }            
+            }
+                        
         });
-
-        console.log(response);
 
         Alert.alert('Solicitação de reserva enviada');
         navigation.navigate('List');
