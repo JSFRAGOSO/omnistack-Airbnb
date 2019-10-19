@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import socketio from 'socket.io-client';
 import api from '../../services/api';
 import './styles.css';
-export default function Dashboard(){
+export default function Dashboard({history}){
 
     const [spots,setSpot] = useState([]);
     const [requests, setRequests] = useState([]);
@@ -34,6 +34,12 @@ export default function Dashboard(){
         loadSpots();
     }, [])
 
+    async function handleUpdate(event,id){
+        event.preventDefault()
+       
+        history.push(`/update/${id}`);
+    }
+
     async function handleAccept(id){
         await api.post(`/bookings/${id}/approvals`)
         setRequests(requests.filter(request => request._id !== id));
@@ -50,7 +56,7 @@ export default function Dashboard(){
                 {requests.map(request =>(
                   <li key={request._id}>
                         <p>
-                            <strong>User</strong> está solicitando uma reserva em <strong>{request.spot.company}</strong> para a data: <strong>{request.date}</strong>
+                            <strong>{request.user.email}</strong> está solicitando uma reserva em <strong>{request.spot.company}</strong> para a data: <strong>{request.date}</strong>
                         </p>
                     <button className="accept" onClick={() => handleAccept(request._id)}>ACEITAR</button>
                     <button className="reject" onClick={() => handleReject(request._id)}>REJEITAR</button> 
@@ -60,8 +66,11 @@ export default function Dashboard(){
             <ul className="spot-list">
                 {spots.map( spot => (
                     <li key= {spot._id}>
-                        <header style = {{backgroundImage: `url(${spot.thumbnail_url})`}}/>
-                            
+                        
+                            <button type="button" className="update" onClick={ (event) =>{handleUpdate(event,spot._id)}}>
+                                <header style = {{backgroundImage: `url(${spot.thumbnail_url})`}}/>
+                            </button>
+                          
                         <strong>{spot.company}</strong>
                         <span> {spot.price ? `R$ ${spot.price}/dia` : 'GRATUITO'} R$ </span>
                     </li>
