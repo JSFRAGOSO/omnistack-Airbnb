@@ -20,5 +20,12 @@ module.exports = {
         }
 
         return res.json(booking);
+    },
+
+    async index(req,res){
+        const {spot} = req.params;
+        const booking = await Booking.find({spot}).populate('user').exec();
+    
+        return res.json(booking);
     }
 }

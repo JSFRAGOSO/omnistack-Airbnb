@@ -23,6 +23,7 @@ routes.patch('/spots/:id_spot',  SpotController.update);
 routes.get('/dashboard',  DashBoardController.show);
 
 routes.post('/spots/:spot_id/bookings', BookingController.store)
+routes.get('/spots/:spot/bookings', BookingController.index);
 routes.post('/bookings/:booking_id/approvals', ApprovalController.store);
 routes.post('/bookings/:booking_id/rejections', RejectionController.store);
 
