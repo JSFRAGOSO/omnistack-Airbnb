@@ -25,9 +25,27 @@ module.exports = {
     },
     async index(req,res){
         const {tech} = req.query;
-
         const spots = await Spot.find({techs:tech});
 
         return res.json(spots);
+    },
+    async show(req,res){
+        const {id_spot} = req.params;
+        const spot = await Spot.findById(id_spot);
+
+        return res.json(spot);
+    },
+    async update(req,res){
+        const {id_spot} = req.params;
+        const {company,price,techs} = req.body;
+
+        const spot = await Spot.findById(id_spot);
+        spot.company = company;
+        spot.techs = techs.split(',').map(tech =>tech.trim());
+        spot.price = price;
+        await spot.save();
+
+        return res.json(spot);
     }
+
 }
