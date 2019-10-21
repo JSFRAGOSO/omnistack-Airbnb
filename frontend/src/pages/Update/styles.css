@@ -7,3 +7,21 @@ label#thumbnail{
     justify-content: center;
     align-items: center; 
 }
+button#bookings{
+    width: 100px;
+    height: 30px;
+    align-self: flex-end;
+}
+button#exit {
+    border: 0px;
+    border-radius: 2px;
+    width: 100%;
+    height: 42px;
+    padding: 0 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background: #999;
+    color: white;
+    cursor:pointer;
+    margin-top: 10px;
+}

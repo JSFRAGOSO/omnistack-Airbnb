@@ -86,6 +86,7 @@ body,input,button{
   background: #f05a5b;
   color: white;
   cursor:pointer;
+  margin-top: 10px;
 }
 
 .content button.btn:hover{
