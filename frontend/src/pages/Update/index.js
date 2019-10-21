@@ -1,10 +1,8 @@
-import React ,{useState, useMemo,useEffect} from 'react';
+import React ,{useState,useEffect} from 'react';
 import api from '../../services/api';
-import camera from '../../assets/camera.svg';
 import './styles.css'
 
 export default function Update({history,match}){
-    const [thumbnail,setThumbnail] = useState(null);
     const [loadedThumb,setloadedThumb] = useState('');
     const [company,setCompany] = useState('');
     const [price,setPrice] = useState('');
@@ -24,14 +22,7 @@ export default function Update({history,match}){
     
         loadSpots();
         
-      }, [match.params]);
-
-    const preview = useMemo(() => {
-        return thumbnail ? URL.createObjectURL(thumbnail):null;
-    },
-        [thumbnail]
-
-    );
+      }, [match.params,spotId]);
 
     async function handleSubmit(event){
         event.preventDefault();
@@ -50,8 +41,7 @@ export default function Update({history,match}){
         <form onSubmit={handleSubmit} className="new-spot">
             <label
              id="thumbnail"
-             style = {{backgroundImage: `url(${preview ? preview : loadedThumb})`}}
-             className = { thumbnail? 'has-thumbnail': ''} 
+             style = {{backgroundImage: `url(${loadedThumb})`}}
             >
             </label>
             
