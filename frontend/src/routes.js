@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import New from './pages/New';
 import Update from './pages/Update';
+import Booking from './pages/Booking';
 
 export default function Routes(){
     return (
@@ -14,6 +15,7 @@ export default function Routes(){
                 <Route path="/dashboard" component= {Dashboard}/>
                 <Route path="/new" component= {New}/>
                 <Route path="/update/:spotId" exact component= {Update}/>
+                <Route path="/booking/:spotId" exact component= {Booking}/>
 
             </Switch>
         </BrowserRouter>

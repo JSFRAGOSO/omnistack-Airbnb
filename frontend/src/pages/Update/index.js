@@ -36,6 +36,17 @@ export default function Update({history,match}){
 
         history.push('/dashboard');
     }
+    function handleBookings(event){
+        event.preventDefault();
+
+        history.push(`/booking/${spotId}`);
+    }
+
+    function handleVoltar(event){
+        event.preventDefault();
+
+        history.push('/dashboard');
+    }
 
     return (
         <form onSubmit={handleSubmit} className="new-spot">
@@ -45,6 +56,7 @@ export default function Update({history,match}){
             >
             </label>
             
+            <button type = "button" className="btn" id="bookings" onClick={handleBookings}>Reservas</button>
 
             <label htmlFor="company">Empresa * </label>
             <input 
@@ -69,6 +81,7 @@ export default function Update({history,match}){
             />
 
             <button type = "submit" className="btn">Atualizar</button>
+            <button type = "button" id="exit" onClick ={handleVoltar}>Voltar</button>
         </form>
     );
 }
